@@ -1,0 +1,2 @@
++proj=longlat +datum=NAD83 +no_defs +type=crs
++proj=utm +zone=31 +datum=WGS84 +units=m +no_defs +type=crs

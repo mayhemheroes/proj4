@@ -1,0 +1,8 @@
+project: proj4
+target: proj_crs_to_crs_fuzzer
+testsuite:
+  - file:///mayhem/mayhem/testsuite/proj_crs_to_crs_fuzzer
+cmds:
+  - cmd: /mayhem/proj_crs_to_crs_fuzzer
+    libfuzzer: true
+    dictionary: /mayhem/mayhem/proj_crs_to_crs_fuzzer.dict

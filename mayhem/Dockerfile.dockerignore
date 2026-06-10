@@ -1,0 +1,29 @@
+# Per-Dockerfile ignore for the commit-image build (BuildKit uses
+# `<dockerfile-path>.dockerignore` IN PLACE OF the repo-root `.dockerignore`
+# when building with `-f mayhem/Dockerfile`).
+#
+# Upstream PROJ ships a root `.dockerignore` that excludes `.git` and `build`
+# (for its own root Dockerfile). Our spec REQUIRES baking the FULL repo incl.
+# `.git` history into the commit image, so we override that here without
+# touching the upstream file (keeps the mayhem layer purely additive).
+#
+# Goal: bake in the FULL repo (including .git history — the grader uses it),
+# dropping only local build artifacts and editor/OS cruft. Dev image, not minimal.
+
+# ── Build outputs / local cruft ──────────────────────────────────────────────
+# build.sh produces its outputs under /mayhem (and mayhem-build/ / mayhem-tests/)
+# at build time; keep stray local trees out of the context.
+build/
+out/
+mayhem-build/
+mayhem-tests/
+*.o
+*.a
+*.so
+*.dylib
+**/__pycache__/
+
+# ── Editor / OS noise ────────────────────────────────────────────────────────
+.DS_Store
+*.swp
+*~
